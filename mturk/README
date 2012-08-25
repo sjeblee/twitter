@@ -1,0 +1,51 @@
+README
+Mechanical Turk Arabic Classification for Twitter
+Serena Jeblee (sjeblee1@jhu.edu)
+
+0. Files Needed: (you will need to create the files in brackets)
+
+makeinput.sh
+MakeInput.java
+MakeControls.java (if you do not have separate control files)
+getResults.sh
+ProcessResults.java
+[control-data-file] (or [msa-control-file] and [dialect-control-file])
+[input-data-file]
+[project].question
+[project].properties
+
+----------------
+1. Data Preparation
+
+- If you do not have two control files (one with MSA and one with dialect), then 
+	you need a single file with annotated sentences to use for controls;
+	run this command:
+$ java MakeControls [control-data-file]
+
+- If you do have control files already, rename them "controls-msa.txt" and "controls-dia.txt"
+
+-edit makeinput.sh - specify input data file and output name
+	java MakeInput [input-data-file] [output-name]
+
+$ ./makeinput.sh
+
+-----------------
+2. Posting HITs
+
+-edit run2.sh so that -input points to the ?-images.input file created by makeinput.sh
+	and your .properties and .question file
+$ ./run2.sh
+
+-------------------
+3. Getting Results
+
+$ ./getResults.sh
+
+- review assignments in reject.txt, and run rejectWork.sh on them
+$ cd ../../bin
+$ ./rejectWork.sh -rejectfile ../samples/[project-name]/reject.txt
+
+
+
+
+
